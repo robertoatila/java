@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.util.Locale;
 public class CadastroVeiculo {
     public static void main(String[] args) {
+        Locale.setDefault(new Locale("pt", "BR"));
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Modelo do Veiculo: ");
@@ -24,7 +26,7 @@ public class CadastroVeiculo {
         System.out.println("\n--- Informacoes do Veiculo ---");
         System.out.println("Modelo: " + modeloVeiculo);
         System.out.println("Ano de Fabricacao: " + anoFabricacao);
-        System.out.println("Valor do Veiculo: R$ " + valorCarro);
+        System.out.println("Valor do Veiculo: R$ %,.2f%n" + valorCarro);
         System.out.println("Possui seguro: " + possuiSeguro);
         scanner.close();
     }
