@@ -12,13 +12,13 @@ public class CadastroFuncionario {
         double salario = scanner.nextDouble();
 
         System.out.print("Anos na empresa: ");
-        double anosEmpresa = scanner.nextDouble();
+        int anosEmpresa = scanner.nextInt();
 
         System.out.print("Está trabalhando atualmente? true para sim, false para não: ");
         boolean trabalhando = scanner.nextBoolean();
 
         if(salario < 5000){
-            System.out.print("Não paga mais imposto de Renda");
+            System.out.println("Não paga mais imposto de Renda.");
         }
         if(anosEmpresa > 10){
             salario = salario + (salario * 0.25);
