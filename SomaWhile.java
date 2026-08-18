@@ -6,12 +6,12 @@ public class SomaWhile {
         int contador = 1, numero;
         int soma = 0;
         while (contador <= 5) {
-            System.out.println("Digite um número: ");
+            System.out.println("Número: ");
             numero = scanner.nextInt();
             soma = soma + numero;
             contador++;
         }
-        System.out.println("A soma de 5 números é: " + soma);
+        System.out.println("Soma dos 5 números é: " + soma);
         scanner.close();
     }
 }
