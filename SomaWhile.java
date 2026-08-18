@@ -6,7 +6,7 @@ public class SomaWhile {
         int contador = 1, numero;
         int soma = 0;
         while (contador <= 5) {
-            System.out.println("Número: ");
+            System.out.print("Número: ");
             numero = scanner.nextInt();
             soma = soma + numero;
             contador++;

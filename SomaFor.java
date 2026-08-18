@@ -5,7 +5,7 @@ public class SomaFor {
         Scanner scanner = new Scanner(System.in);
         int soma = 0, numero;
         for (int contador = 1; contador <= 5; contador++) {
-            System.out.println("Número: ");
+            System.out.print("Número: ");
             numero = scanner.nextInt();
             soma = soma + numero;
         }
