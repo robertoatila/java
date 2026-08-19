@@ -24,7 +24,6 @@ public class Sala {
         double maiorMedia = -1;
         double menorMedia = 11;
 
-        int alunoMaiorMedia = 0;
         String nomeMaiorMedia = "";
 
         double[] medias = new double[sala];
@@ -44,6 +43,7 @@ public class Sala {
 
             System.out.print("Nota da terceira prova: ");
             double prova3 = scanner.nextDouble();
+            scanner.nextLine(); // Consome a quebra de linha após o número
 
             double media = (prova1 + prova2 + prova3) / 3;
 
@@ -56,53 +56,42 @@ public class Sala {
             if (media >= 7) {
                 System.out.println("Aprovado!");
                 aprovados++;
-            }
-            else if (media >= 5) {
+            } else if (media >= 5) {
                 System.out.println("Recuperação!");
                 recuperacao++;
-            }
-            else {
+            } else {
                 System.out.println("Reprovado!");
                 reprovados++;
             }
 
             if (media > maiorMedia) {
                 maiorMedia = media;
-                alunoMaiorMedia = contador;
                 nomeMaiorMedia = aluno;
             }
 
             if (media < menorMedia) {
                 menorMedia = media;
             }
-
-            scanner.nextLine();
         }
 
         double mediaGeral = somaMedias / sala;
 
         int acimaMediaGeral = 0;
-
         for (int contador = 0; contador < sala; contador++) {
-
-            if (medias[contador] > mediaGeral) {
+            if (medias[contador] >= mediaGeral) {
                 acimaMediaGeral++;
             }
         }
 
         System.out.println("\n===== RESULTADO DA TURMA =====");
-
         System.out.println("Aprovados: " + aprovados);
         System.out.println("Recuperação: " + recuperacao);
-        System.out.println("Reprovado:" + reprovados);
-
-        System.out.printf("Maior média: %.2fn", maiorMedia);
+        System.out.println("Reprovados: " + reprovados);
+        System.out.printf("Maior média: %.2f (Aluno: %s)%n", maiorMedia, nomeMaiorMedia);
         System.out.printf("Menor média: %.2f%n", menorMedia);
         System.out.printf("Média geral: %.2f%n", mediaGeral);
-
-         System.out.println("Nome do aluno com maior média: " + nomeMaiorMedia);
-        System.out.println("Alunos acima da média geral: " + acimaMediaGeral);
+        System.out.println("Alunos com média acima ou igual à média geral: " + acimaMediaGeral);
 
         scanner.close();
     }
-} 
+}
