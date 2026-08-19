@@ -43,7 +43,7 @@ public class Sala {
 
             System.out.print("Nota da terceira prova: ");
             double prova3 = scanner.nextDouble();
-            scanner.nextLine(); // Consome a quebra de linha após o número
+            scanner.nextLine(); // Limpa o buffer após ler o número
 
             double media = (prova1 + prova2 + prova3) / 3;
 
@@ -90,7 +90,7 @@ public class Sala {
         System.out.printf("Maior média: %.2f (Aluno: %s)%n", maiorMedia, nomeMaiorMedia);
         System.out.printf("Menor média: %.2f%n", menorMedia);
         System.out.printf("Média geral: %.2f%n", mediaGeral);
-        System.out.println("Alunos com média acima ou igual à média geral: " + acimaMediaGeral);
+        System.out.println("Alunos acima da média geral: " + acimaMediaGeral);
 
         scanner.close();
     }
