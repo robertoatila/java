@@ -8,6 +8,12 @@ public class Sala {
         System.out.print("Quantos alunos existem na sala: ");
         int sala = scanner.nextInt();
 
+        if (sala <= 0) {
+            System.out.println("A sala deve possuir pelo menos 1 aluno.");
+            scanner.close();
+            return;
+        }
+
         scanner.nextLine();
 
         int aprovados = 0;
@@ -19,6 +25,7 @@ public class Sala {
         double menorMedia = 11;
 
         int alunoMaiorMedia = 0;
+        String nomeMaiorMedia = "";
 
         double[] medias = new double[sala];
 
@@ -26,16 +33,16 @@ public class Sala {
 
             System.out.println("\nAluno " + contador);
 
-            System.out.println("Nome do aluno: ");
+            System.out.print("Nome do aluno: ");
             String aluno = scanner.nextLine();
 
-            System.out.println("Nota da primeira prova: ");
+            System.out.print("Nota da primeira prova: ");
             double prova1 = scanner.nextDouble();
 
-            System.out.println("Nota da segunda prova: ");
+            System.out.print("Nota da segunda prova: ");
             double prova2 = scanner.nextDouble();
 
-            System.out.println("Nota da terceira prova: ");
+            System.out.print("Nota da terceira prova: ");
             double prova3 = scanner.nextDouble();
 
             double media = (prova1 + prova2 + prova3) / 3;
@@ -43,14 +50,14 @@ public class Sala {
             medias[contador - 1] = media;
             somaMedias = somaMedias + media;
 
-            System.out.println("Nome: " + aluno);
+            System.out.println("\nNome: " + aluno);
             System.out.printf("Média do aluno: %.1f%n", media);
 
             if (media >= 7) {
                 System.out.println("Aprovado!");
                 aprovados++;
             }
-            else if (media >= 5 && media < 7) {
+            else if (media >= 5) {
                 System.out.println("Recuperação!");
                 recuperacao++;
             }
@@ -62,6 +69,7 @@ public class Sala {
             if (media > maiorMedia) {
                 maiorMedia = media;
                 alunoMaiorMedia = contador;
+                nomeMaiorMedia = aluno;
             }
 
             if (media < menorMedia) {
@@ -86,15 +94,15 @@ public class Sala {
 
         System.out.println("Aprovados: " + aprovados);
         System.out.println("Recuperação: " + recuperacao);
-        System.out.println("Reprovados: " + reprovados);
+        System.out.println("Reprovado:" + reprovados);
 
-        System.out.printf("Maior média: %.2f%n", maiorMedia);
+        System.out.printf("Maior média: %.2fn", maiorMedia);
         System.out.printf("Menor média: %.2f%n", menorMedia);
         System.out.printf("Média geral: %.2f%n", mediaGeral);
 
-        System.out.println("Aluno com maior média: " + alunoMaiorMedia);
+         System.out.println("Nome do aluno com maior média: " + nomeMaiorMedia);
         System.out.println("Alunos acima da média geral: " + acimaMediaGeral);
 
         scanner.close();
     }
-}
+} 
