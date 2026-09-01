@@ -1,0 +1,752 @@
+RESUMO DEFINITIVO — JAVA / POO
+Repositório: robertoatila/java
+Objetivo: revisão prática para prova de Java e Orientação a Objetos.
+
+============================================================
+1. ESTRUTURA MENTAL PARA RESOLVER UM EXERCÍCIO
+============================================================
+
+1) Leia o enunciado e identifique o OBJETO principal.
+2) Liste os ATRIBUTOS pedidos.
+3) Crie a CLASSE do objeto.
+4) Coloque os atributos como PRIVATE.
+5) Gere GETTERS e SETTERS.
+6) Identifique as AÇÕES do objeto e crie MÉTODOS.
+7) Coloque as REGRAS DE NEGÓCIO dentro dos métodos da classe.
+8) Crie a MAIN para criar e testar os objetos.
+9) Se houver entrada do usuário, use Scanner.
+10) Teste também os casos inválidos/limites.
+
+Pense sempre:
+CLASSE = molde
+OBJETO = uma instância do molde
+ATRIBUTO = dado/característica
+MÉTODO = ação/comportamento
+MAIN = ponto de execução e teste
+
+============================================================
+2. ESQUELETO DE UMA CLASSE DE MODELO
+============================================================
+
+public class Produto {
+
+    private int codigo;
+    private String nome;
+    private double preco;
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public void algumaAcao() {
+        // regra de negócio
+    }
+}
+
+IMPORTANTE:
+- private protege o atributo (encapsulamento).
+- GET = obtém/lê.
+- SET = altera.
+- this. = atributo do próprio objeto.
+
+============================================================
+3. OBJETO E NEW
+============================================================
+
+Produto produto = new Produto();
+
+Produto       -> tipo/classe
+produto       -> referência/variável
+new Produto() -> cria um novo objeto
+
+Exemplo com dois objetos:
+
+Aluno aluno1 = new Aluno();
+Aluno aluno2 = new Aluno();
+
+Os dois são objetos diferentes, mesmo sendo da mesma classe.
+
+============================================================
+4. GETTER E SETTER
+============================================================
+
+GETTER:
+
+public String getNome() {
+    return nome;
+}
+
+SETTER:
+
+public void setNome(String nome) {
+    this.nome = nome;
+}
+
+Decore assim:
+GET = PEGAR
+SET = COLOCAR/ALTERAR
+
+============================================================
+5. CONSTRUTOR
+============================================================
+
+Forma com construtor:
+
+public Aluno(String nome, int idade) {
+    this.nome = nome;
+    this.idade = idade;
+}
+
+Uso:
+
+Aluno aluno = new Aluno("Carlos", 16);
+
+Sem construtor personalizado:
+
+Aluno aluno = new Aluno();
+aluno.setNome("Carlos");
+aluno.setIdade(16);
+
+Saiba reconhecer os dois formatos.
+
+============================================================
+6. THIS
+============================================================
+
+public void setNome(String nome) {
+    this.nome = nome;
+}
+
+Existem dois nomes:
+- nome do parâmetro -> nome
+- nome do atributo -> this.nome
+
+Outro exemplo:
+
+this.saldo += valor;
+
+equivale a:
+
+this.saldo = this.saldo + valor;
+
+NUNCA escreva This. — Java diferencia maiúsculas e minúsculas.
+O correto é sempre this.
+
+============================================================
+7. MÉTODOS E RESPONSABILIDADE
+============================================================
+
+Regra importante:
+A MAIN deve criar objetos e chamar métodos.
+A classe deve guardar os dados e executar as regras do objeto.
+
+ERRADO para POO:
+
+// fazer toda a regra financeira diretamente na Main
+saldo = saldo - saque;
+
+PREFERÍVEL:
+
+conta.sacar(200);
+
+E dentro de ContaCorrente:
+
+public void sacar(double valor) {
+    if (valor <= saldo) {
+        saldo -= valor;
+    } else {
+        System.out.println("Saldo insuficiente.");
+    }
+}
+
+============================================================
+8. IF / ELSE
+============================================================
+
+Estrutura:
+
+if (condicao) {
+    // acontece se verdadeiro
+} else {
+    // acontece se falso
+}
+
+Exemplo de aprovação:
+
+if (media >= 6.0) {
+    System.out.println("Situação: Aprovado.");
+} else {
+    System.out.println("Situação: Reprovado.");
+}
+
+============================================================
+9. CUIDADO COM MATEMÁTICA E PRIORIDADE
+============================================================
+
+MÉDIA CORRETA:
+
+double media = (nota1 + nota2) / 2;
+
+NÃO faça:
+
+nota1 + nota2 / 2
+
+Porque / tem prioridade sobre +.
+
+Exemplo:
+(8 + 7) / 2 = 7,5
+
+Enquanto:
+8 + 7 / 2 = 11,5
+
+============================================================
+10. VOID X RETURN
+============================================================
+
+void:
+
+public void calcularMedia() {
+    double media = (nota1 + nota2) / 2;
+    System.out.println(media);
+}
+
+Não devolve valor.
+
+Com retorno:
+
+public double calcularMedia() {
+    return (nota1 + nota2) / 2;
+}
+
+Uso:
+
+double media = aluno.calcularMedia();
+
+Se o método precisa ENTREGAR um valor para outro lugar, use return.
+
+============================================================
+11. PRINTLN E PRINTF
+============================================================
+
+println:
+
+System.out.println("Nome: " + nome);
+
+printf é usado para FORMATAR.
+
+System.out.printf("Média: %.2f%n", media);
+
+%.2f = número decimal com 2 casas.
+%n = quebra de linha.
+
+Exemplo:
+7.5 -> 7,50 em configuração brasileira.
+
+Para dinheiro:
+
+System.out.printf("Preço: R$ %.2f%n", preco);
+
+ATENÇÃO: printf usa argumentos separados por vírgula:
+
+System.out.printf("Valor: %.2f%n", valor);
+
+Não coloque o valor concatenado no texto de formatação.
+
+============================================================
+12. SCANNER — BASE
+============================================================
+
+import java.util.Scanner;
+
+Scanner scanner = new Scanner(System.in);
+
+String:
+String nome = scanner.nextLine();
+
+int:
+int idade = scanner.nextInt();
+
+double:
+double preco = scanner.nextDouble();
+
+boolean:
+boolean ativo = scanner.nextBoolean();
+
+No final:
+scanner.close();
+
+============================================================
+13. BUFFER DO SCANNER — ARMADILHA CLÁSSICA
+============================================================
+
+Quando usar número e depois texto:
+
+int idade = scanner.nextInt();
+scanner.nextLine();
+String nome = scanner.nextLine();
+
+O nextLine() logo após nextInt()/nextDouble() pode ser necessário para consumir o ENTER pendente.
+
+Decore:
+NÚMERO -> nextInt/nextDouble
+TEXTO -> nextLine
+NÚMERO -> TEXTO = lembrar do nextLine() intermediário.
+
+============================================================
+14. DO-WHILE + SWITCH — MENU
+============================================================
+
+int opcao;
+
+do {
+
+    System.out.println("1 - Cadastrar");
+    System.out.println("2 - Consultar");
+    System.out.println("3 - Sair");
+
+    opcao = scanner.nextInt();
+
+    switch (opcao) {
+
+        case 1:
+            // ação
+            break;
+
+        case 2:
+            // ação
+            break;
+
+        case 3:
+            System.out.println("Saindo...");
+            break;
+
+        default:
+            System.out.println("Opção inválida.");
+            break;
+    }
+
+} while (opcao != 3);
+
+PONTOS DE ATENÇÃO:
+- do-while executa pelo menos uma vez.
+- while decide se repete.
+- switch escolhe um case.
+- break impede cair no próximo case.
+- default trata opções inválidas.
+
+============================================================
+15. MODELO DE MAIN COM OBJETO
+============================================================
+
+package Principal;
+
+import Modelo.Produto;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Produto produto = new Produto();
+
+        produto.setCodigo(101);
+        produto.setNome("Teclado");
+        produto.setPreco(150.00);
+
+        produto.exibirDados();
+        produto.algumaAcao();
+    }
+}
+
+A Main TESTA a classe.
+
+============================================================
+16. MODELO DE MENU + OBJETO
+============================================================
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        Produto produto = new Produto();
+        int opcao;
+
+        do {
+            System.out.println("1 - Exibir dados");
+            System.out.println("2 - Adicionar estoque");
+            System.out.println("3 - Remover estoque");
+            System.out.println("4 - Sair");
+            System.out.print("Opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    produto.exibirDados();
+                    break;
+                case 2:
+                    System.out.print("Quantidade: ");
+                    int qtdAdd = scanner.nextInt();
+                    produto.adicionarEstoque(qtdAdd);
+                    break;
+                case 3:
+                    System.out.print("Quantidade: ");
+                    int qtdRemove = scanner.nextInt();
+                    produto.removerEstoque(qtdRemove);
+                    break;
+                case 4:
+                    System.out.println("Programa encerrado.");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+
+        } while (opcao != 4);
+
+        scanner.close();
+    }
+}
+
+============================================================
+17. PADRÕES DE REGRAS DE NEGÓCIO
+============================================================
+
+DEPÓSITO:
+
+if (valor <= 0) {
+    System.out.println("Valor inválido.");
+    return;
+}
+saldo += valor;
+
+SAQUE:
+
+if (valor <= 0) {
+    System.out.println("Valor inválido.");
+    return;
+}
+
+if (valor > saldo) {
+    System.out.println("Saldo insuficiente.");
+    return;
+}
+
+saldo -= valor;
+
+ESTOQUE:
+
+if (quantidade > estoque) {
+    System.out.println("Estoque insuficiente.");
+    return;
+}
+
+estoque -= quantidade;
+
+VALIDAÇÃO:
+- valores <= 0 normalmente devem ser rejeitados quando o enunciado exigir valor positivo.
+- quantidade removida não pode ser maior que estoque disponível quando essa for a regra.
+- mantenha a regra dentro da classe do objeto.
+
+============================================================
+18. EARLY RETURN
+============================================================
+
+Quando a condição inválida já encerra a operação:
+
+if (valor <= 0) {
+    System.out.println("Valor inválido.");
+    return;
+}
+
+Depois fica mais fácil continuar:
+
+saldo += valor;
+
+Isso evita if/else muito aninhado.
+
+============================================================
+19. ERROS QUE VOCÊ JÁ COMETEU — REVISAR ANTES DA PROVA
+============================================================
+
+1) Usar variável errada.
+Exemplo: método recebe deposito, mas tenta usar saque.
+
+2) Escrever This em vez de this.
+Correto: this.SaldoConta
+
+3) Usar variável sem declarar.
+Exemplo: valorTotal cannot be resolved to a variable.
+
+4) Fazer média sem parênteses.
+Correto: (nota1 + nota2) / 2
+
+5) Declarar método dentro de outro método.
+Em Java métodos ficam no corpo da classe, não dentro de outro método.
+
+6) Chamar getter antes de criá-lo.
+Exemplo: getNumeroConta(), getTitularConta(), getSaldoConta().
+
+7) Esquecer ponto e vírgula.
+Exemplo:
+System.out.println("Texto");
+
+8) Texto de resultado incorreto.
+Exemplo: "Moggado" quando o correto era "Reprovado".
+
+9) Confundir println com printf.
+Para formatação decimal, use printf.
+
+10) Esquecer break no switch.
+
+11) Esquecer nextLine() depois de leitura numérica quando em seguida vier texto.
+
+12) Fazer regra de negócio toda na Main em exercícios de POO.
+
+============================================================
+20. CHECKLIST DE SINTAXE ANTES DE RODAR
+============================================================
+
+[ ] package correto?
+[ ] import correto?
+[ ] nome da classe correto?
+[ ] nome da variável correto?
+[ ] parênteses fechados?
+[ ] chaves fechadas?
+[ ] ponto e vírgula?
+[ ] método recebe os parâmetros certos?
+[ ] variável foi declarada?
+[ ] this está escrito com t minúsculo?
+[ ] getters/setters existem?
+[ ] if/else correto?
+[ ] cálculo usa parênteses quando necessário?
+[ ] break em cada case?
+[ ] Scanner criado e fechado?
+[ ] nextLine() após nextInt/nextDouble quando necessário?
+[ ] testei caso válido?
+[ ] testeI caso inválido?
+
+============================================================
+21. COMO LER UM ENUNCIADO DE PROVA
+============================================================
+
+Exemplo:
+"Crie uma classe ContaCorrente com numero, titular e saldo."
+
+Tradução imediata:
+
+classe -> ContaCorrente
+atributos -> numero, titular, saldo
+acesso -> private + getters/setters
+
+"depositar"
+-> método
+-> soma no saldo
+
+"sacar somente se houver saldo suficiente"
+-> método
+-> if (valor <= saldo)
+
+"exibir dados"
+-> método que imprime atributos
+
+"Crie também uma Main"
+-> new ContaCorrente()
+-> set...
+-> chamar métodos
+
+============================================================
+22. EXEMPLO MENTAL: CONTA CORRENTE
+============================================================
+
+ContaCorrente conta = new ContaCorrente();
+
+conta.setNumero(12345);
+conta.setTitular("João");
+conta.setSaldo(1000.00);
+
+conta.exibirDados();
+conta.depositar(500.00);
+conta.sacar(200.00);
+conta.sacar(2000.00);
+conta.consultarSaldo();
+
+Resultado final esperado:
+1000 + 500 - 200 = 1300
+A tentativa de 2000 não deve alterar o saldo.
+
+============================================================
+23. EXEMPLO MENTAL: ALUNO
+============================================================
+
+Aluno aluno = new Aluno();
+
+aluno.setMatricula(202501);
+aluno.setNomeAluno("Carlos");
+aluno.setNota1(8.0);
+aluno.setNota2(7.0);
+
+Média:
+(8.0 + 7.0) / 2 = 7.5
+
+Aprovação:
+7.5 >= 6.0 -> aprovado
+
+Segundo aluno:
+(5.0 + 4.0) / 2 = 4.5
+4.5 >= 6.0 -> falso -> reprovado
+
+============================================================
+24. EXEMPLO MENTAL: PRODUTO / ESTOQUE
+============================================================
+
+Produto produto = new Produto();
+
+produto.setCodigo(101);
+produto.setNome("Teclado");
+produto.setPreco(150.00);
+produto.setQuantidadeEstoque(10);
+
+Adicionar 5:
+10 + 5 = 15
+
+Remover 3:
+15 - 3 = 12
+
+Tentar remover 20:
+20 > 12 -> não remove
+
+Valor do estoque:
+12 * 150 = 1800
+
+============================================================
+25. SCANNER + LOCALE
+============================================================
+
+O seu repositório contém exemplos usando:
+
+import java.util.Scanner;
+import java.util.Locale;
+
+Para padrão brasileiro:
+
+Locale.setDefault(new Locale("pt", "BR"));
+
+E para moeda/decimal formatado:
+
+System.out.printf("Salário: R$ %,.2f%n", salario);
+
+Saiba identificar quando o enunciado pede formatação brasileira.
+
+============================================================
+26. PADRÃO DE PROJETO NO ECLIPSE
+============================================================
+
+É comum separar:
+
+src
+├── modelo / Modelo
+│   └── Classes de domínio
+│
+└── principal / Principal
+    └── Main
+
+Na classe principal, importe a classe de modelo:
+
+import Modelo.Aluno;
+
+ou:
+
+import modelo.ContaCorrente;
+
+O package precisa coincidir com a organização do projeto.
+
+============================================================
+27. O QUE MAIS VALE DECORAR
+============================================================
+
+1. private atributo
+2. getter = return atributo
+3. setter = this.atributo = parâmetro
+4. new = cria objeto
+5. objeto.metodo() = chama método
+6. if/else = regra/decisão
+7. (a + b) / 2 = média
+8. %.2f = duas casas decimais
+9. nextInt / nextDouble / nextLine
+10. nextLine() depois de leitura numérica quando necessário
+11. do-while + switch para menu
+12. break no switch
+13. return para devolver valor ou sair cedo
+14. this. com t minúsculo
+15. class = molde / object = instância
+
+============================================================
+28. ESTRATÉGIA FINAL DE PROVA
+============================================================
+
+ANTES DE CODAR:
+- sublinhe classes, atributos, métodos e regras no enunciado.
+
+DURANTE A CLASSE:
+- escreva atributos private.
+- faça getters/setters.
+- faça os métodos de negócio.
+
+NA MAIN:
+- crie o objeto.
+- alimente com setters ou construtor.
+- chame os métodos.
+
+NO FINAL:
+- execute.
+- teste caso normal.
+- teste limite/erro.
+- confira mensagens.
+- confira chaves, ;, parênteses, this, break e nomes.
+
+REGRA DE OURO:
+NÃO TENTE ESCREVER TUDO DE UMA VEZ.
+Monte nesta ordem:
+ATRIBUTOS -> GET/SET -> MÉTODOS -> MAIN -> TESTES.
+
+============================================================
+29. NOTA SOBRE O SEU CÓDIGO ATUAL
+============================================================
+
+No seu exercício de Aluno, o código correto da média é:
+
+double media = (nota1 + nota2) / 2;
+
+E a situação precisa ser:
+
+if (media >= 6.0) {
+    System.out.println("Situação: Aprovado.");
+} else {
+    System.out.println("Situação: Reprovado.");
+}
+
+Seu repositório contém esse padrão de POO, além de exemplos com Scanner, Locale, menus e ContaCorrente. Use este arquivo como revisão rápida antes da prova.
+
+BOA PROVA. FOCO EM ENTENDER O PADRÃO, NÃO EM DECORAR CADA EXERCÍCIO.
