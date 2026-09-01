@@ -1,28 +1,37 @@
-RESUMO DEFINITIVO — JAVA / POO
-Repositório: robertoatila/java
-FOCO DA PROVA: ESQUELETO + CÓDIGO. GET/SET = GERAR AUTOMATICAMENTE NO ECLIPSE.
+RESUMO DE PROVA — JAVA / POO
+================================
+FOCO: ESTRUTURA DA PROVA + CÓDIGO.
+NÃO DECORAR 500 LINHAS. DECORAR O ESQUELETO.
+GET/SET: GERAR AUTOMATICAMENTE NO ECLIPSE.
 
-============================================================
-1. ORDEM PARA RESOLVER QUALQUER EXERCÍCIO
-============================================================
-1) Ler o enunciado.
-2) Listar atributos.
-3) Criar classe.
-4) Atributos private.
-5) Criar métodos pedidos.
-6) Source -> Generate Getters and Setters -> Select All -> Generate.
-7) Fazer regras com if/else.
-8) Criar Main.
-9) Criar objeto com new.
-10) Preencher com set.
-11) Chamar métodos.
-12) Testar caso normal e caso de erro.
-13) Corrigir saída.
-14) Salvar e executar.
 
-============================================================
-2. ESQUELETO DE CLASSE
-============================================================
+1. ORDEM DA PROVA
+=================
+ENUNCIADO
+  ↓
+ATRIBUTOS
+  ↓
+private
+  ↓
+MÉTODOS
+  ↓
+GET/SET NO ECLIPSE
+  ↓
+IF / ELSE / CÁLCULO
+  ↓
+MAIN
+  ↓
+new
+  ↓
+set
+  ↓
+CHAMAR MÉTODOS
+  ↓
+TESTAR
+
+
+2. ESQUELETO DA CLASSE
+======================
 package Modelo;
 
 public class Classe {
@@ -31,24 +40,37 @@ public class Classe {
     private String nome;
     private double valor;
 
-    // Source -> Generate Getters and Setters -> Select All -> Generate
-
-    public void algumaAcao() {
-        // regra de negócio
+    public void metodo() {
+        // regra
     }
 
-    public double calcularAlgo() {
+    public double calcular() {
         return 0;
-    }
-
-    public void exibirDados() {
-        System.out.println("...");
     }
 }
 
-============================================================
-3. MAIN
-============================================================
+
+3. GETTERS E SETTERS
+====================
+No Eclipse:
+Source → Generate Getters and Setters → Select All → Generate
+
+Formato:
+public int getCodigo() {
+    return codigo;
+}
+
+public void setCodigo(int codigo) {
+    this.codigo = codigo;
+}
+
+Lembre:
+this = atributo da classe
+codigo = parâmetro
+
+
+4. MAIN
+========
 package Principal;
 
 import Modelo.Classe;
@@ -63,54 +85,22 @@ public class Main {
         objeto.setNome("Teste");
         objeto.setValor(150.00);
 
-        objeto.exibirDados();
-        objeto.algumaAcao();
+        objeto.metodo();
     }
 }
 
-============================================================
-4. GETTER / SETTER — GERAR NO ECLIPSE
-============================================================
-Source -> Generate Getters and Setters -> Select All -> Generate
 
-Formato:
-public int getCodigo() {
-    return codigo;
-}
-
-public void setCodigo(int codigo) {
-    this.codigo = codigo;
-}
-
-============================================================
-5. CONSTRUTOR
-============================================================
-public Classe(int codigo, String nome, double valor) {
-    this.codigo = codigo;
-    this.nome = nome;
-    this.valor = valor;
-}
-
-Classe objeto = new Classe(101, "Teste", 150.00);
-
-Sem construtor personalizado:
-Classe objeto = new Classe();
-objeto.setCodigo(101);
-objeto.setNome("Teste");
-objeto.setValor(150.00);
-
-============================================================
-6. THIS
-============================================================
+5. THIS
+=======
 this.nome = nome;
-this.saldo += valor;
-this.quantidade -= quantidade;
+this.valor = valor;
+this.quantidade += quantidade;
 
-SEMPRE: this com t minúsculo.
+SEMPRE: this em minúsculo.
 
-============================================================
-7. IF / ELSE — MODELOS
-============================================================
+
+6. IF / ELSE
+============
 if (condicao) {
     // verdadeiro
 }
@@ -126,14 +116,6 @@ else {
     System.out.println("Saldo insuficiente.");
 }
 
-ESTOQUE:
-if (quantidade <= estoque) {
-    estoque -= quantidade;
-}
-else {
-    System.out.println("Estoque insuficiente.");
-}
-
 APROVAÇÃO:
 if (media >= 6.0) {
     System.out.println("Situação: Aprovado.");
@@ -142,120 +124,91 @@ else {
     System.out.println("Situação: Reprovado.");
 }
 
-============================================================
-8. REGRAS DE NEGÓCIO — COPIAR E ADAPTAR
-============================================================
-DEPÓSITO:
-public void depositar(double valor) {
-    if (valor <= 0) {
-        System.out.println("Valor inválido.");
-        return;
-    }
-    saldo += valor;
-}
 
-SAQUE:
-public void sacar(double valor) {
-    if (valor <= 0) {
-        System.out.println("Valor inválido.");
-        return;
-    }
-    if (valor > saldo) {
-        System.out.println("Saldo insuficiente.");
-        return;
-    }
-    saldo -= valor;
-}
-
-ESTOQUE:
-public void adicionarEstoque(int quantidade) {
-    this.quantidade += quantidade;
-}
-
-public void removerEstoque(int quantidade) {
-    if (quantidade > this.quantidade) {
-        System.out.println("Estoque insuficiente.");
-        return;
-    }
-    this.quantidade -= quantidade;
-}
-
-============================================================
-9. CÁLCULOS
-============================================================
+7. CÁLCULOS IMPORTANTES
+=======================
 double media = (nota1 + nota2) / 2;
 double total = preco * quantidade;
-salario = salario + (salario * 0.25);
 saldo += valor;
 saldo -= valor;
-quantidade += quantidade;
-quantidade -= quantidade;
+quantidade += valor;
+quantidade -= valor;
 
 CUIDADO:
-nota1 + nota2 / 2  !=  (nota1 + nota2) / 2
+nota1 + nota2 / 2  ← ERRADO para média
+(nota1 + nota2) / 2 ← CERTO
 
-============================================================
-10. VOID X RETURN
-============================================================
+
+8. VOID X RETURN
+================
+void = executa uma ação
+
 public void consultarSaldo() {
     System.out.println(saldo);
 }
+
+return = devolve um valor
 
 public double calcularMedia() {
     return (nota1 + nota2) / 2;
 }
 
-double media = aluno.calcularMedia();
 
-============================================================
-11. PRINTLN / PRINTF
-============================================================
+9. PRINTLN X PRINTF
+===================
 System.out.println("Nome: " + nome);
 
 System.out.printf("Média: %.2f%n", media);
 System.out.printf("Preço: R$ %.2f%n", preco);
 
-%.2f = decimal com 2 casas.
-%n = quebra de linha.
+%.2f = 2 casas decimais
+%n = quebra de linha
 
-============================================================
-12. SCANNER
-============================================================
+
+10. CONSTRUTOR
+==============
+public Classe(int codigo, String nome) {
+    this.codigo = codigo;
+    this.nome = nome;
+}
+
+Uso:
+Classe objeto = new Classe(101, "Teste");
+
+Se não houver construtor personalizado:
+Classe objeto = new Classe();
+
+
+11. SCANNER
+===========
 import java.util.Scanner;
 
 Scanner scanner = new Scanner(System.in);
 
-String nome = scanner.nextLine();
 int idade = scanner.nextInt();
 double preco = scanner.nextDouble();
-boolean ativo = scanner.nextBoolean();
+String nome = scanner.nextLine();
 
 scanner.close();
 
-============================================================
-13. BUFFER DO SCANNER
-============================================================
+NÚMERO → TEXTO:
+scanner.nextLine(); // limpar buffer
+
+Exemplo:
 int idade = scanner.nextInt();
 scanner.nextLine();
 String nome = scanner.nextLine();
 
-NÚMERO -> TEXTO = lembrar do nextLine() intermediário.
 
-============================================================
-14. MENU DO-WHILE + SWITCH
-============================================================
-import java.util.Scanner;
-
-Scanner scanner = new Scanner(System.in);
+12. MENU — DO WHILE + SWITCH
+============================
 int opcao;
 
 do {
 
-    System.out.println("===== MENU =====");
     System.out.println("1 - ...");
     System.out.println("2 - ...");
     System.out.println("0 - Sair");
-    System.out.print("Opção: ");
     opcao = scanner.nextInt();
 
     switch (opcao) {
@@ -269,7 +222,7 @@ do {
             break;
 
         case 0:
-            System.out.println("Programa encerrado.");
+            System.out.println("Saindo...");
             break;
 
         default:
@@ -279,50 +232,12 @@ do {
 
 } while (opcao != 0);
 
-scanner.close();
 
-============================================================
-15. MENU + OBJETO
-============================================================
-Scanner scanner = new Scanner(System.in);
-Produto produto = new Produto();
-int opcao;
+13. ESTRUTURA DOS EXERCÍCIOS DA PROVA
+=====================================
 
-do {
-    System.out.println("1 - Exibir dados");
-    System.out.println("2 - Adicionar estoque");
-    System.out.println("3 - Remover estoque");
-    System.out.println("4 - Sair");
-    opcao = scanner.nextInt();
-
-    switch (opcao) {
-        case 1:
-            produto.exibirDados();
-            break;
-        case 2:
-            System.out.print("Quantidade: ");
-            int qtd = scanner.nextInt();
-            produto.adicionarEstoque(qtd);
-            break;
-        case 3:
-            System.out.print("Quantidade: ");
-            qtd = scanner.nextInt();
-            produto.removerEstoque(qtd);
-            break;
-        case 4:
-            System.out.println("Programa encerrado.");
-            break;
-        default:
-            System.out.println("Opção inválida.");
-            break;
-    }
-} while (opcao != 4);
-
-scanner.close();
-
-============================================================
-16. ALUNO
-============================================================
+ALUNO
+-----
 private int matricula;
 private String nome;
 private double nota1;
@@ -343,28 +258,9 @@ public void verificarAprovacao() {
     }
 }
 
-public void exibirDados() {
-    System.out.println("Matrícula: " + matricula);
-    System.out.println("Nome: " + nome);
-    System.out.println("Nota 1: " + nota1);
-    System.out.println("Nota 2: " + nota2);
-    System.out.printf("Média: %.2f%n", calcularMedia());
-}
 
-GET/SET -> gerar no Eclipse.
-
-MAIN:
-Aluno aluno1 = new Aluno();
-aluno1.setMatricula(202501);
-aluno1.setNome("Carlos");
-aluno1.setNota1(8.0);
-aluno1.setNota2(7.0);
-aluno1.exibirDados();
-aluno1.verificarAprovacao();
-
-============================================================
-17. CONTA CORRENTE
-============================================================
+CONTA CORRENTE
+--------------
 private int numero;
 private String titular;
 private double saldo;
@@ -386,28 +282,9 @@ public void consultarSaldo() {
     System.out.printf("Saldo: R$ %.2f%n", saldo);
 }
 
-public void exibirDados() {
-    System.out.println("Número da conta: " + numero);
-    System.out.println("Titular: " + titular);
-    System.out.printf("Saldo: R$ %.2f%n", saldo);
-}
 
-GET/SET -> gerar no Eclipse.
-
-MAIN:
-ContaCorrente conta = new ContaCorrente();
-conta.setNumero(12345);
-conta.setTitular("João");
-conta.setSaldo(1000.00);
-conta.exibirDados();
-conta.depositar(500.00);
-conta.sacar(200.00);
-conta.sacar(2000.00);
-conta.consultarSaldo();
-
-============================================================
-18. PRODUTO
-============================================================
+PRODUTO
+-------
 private int codigo;
 private String nome;
 private double preco;
@@ -430,74 +307,40 @@ public double calcularValorEstoque() {
     return preco * quantidade;
 }
 
-public void exibirDados() {
-    System.out.println("Código: " + codigo);
-    System.out.println("Nome: " + nome);
-    System.out.printf("Preço: R$ %.2f%n", preco);
-    System.out.println("Quantidade: " + quantidade);
-}
 
-GET/SET -> gerar no Eclipse.
+14. MAIN DE TESTE
+=================
+Classe objeto = new Classe();
 
-============================================================
-19. ERROS PARA NÃO REPETIR
-============================================================
-- saque e deposito trocados como variável/parâmetro
-- This em vez de this
+objeto.setAtributo(valor);
+objeto.setAtributo(valor);
+
+objeto.exibirDados();
+objeto.metodo();
+objeto.calcular();
+
+TESTE SEMPRE:
+1. caso normal
+2. caso limite/erro
+
+
+15. ERROS MAIS PROVÁVEIS
+========================
+- esquecer private
+- esquecer getter/setter
+- usar This em vez de this
 - variável não declarada
 - média sem parênteses
-- método dentro de método
-- getter chamado antes de existir
 - esquecer ;
 - esquecer }
-- esquecer break no switch
-- usar println quando precisa de printf
-- usar printf errado dentro de println
-- esquecer nextLine() depois de nextInt/nextDouble quando próximo input é texto
-- texto de saída errado mesmo quando a lógica está certa
+- esquecer break
+- esquecer nextLine() do buffer
+- colocar regra no Main em vez da classe
+- texto de saída errado
 
-============================================================
-20. CHECKLIST ANTES DE ENTREGAR
-============================================================
-[ ] package
-[ ] import
-[ ] classe = nome do arquivo
-[ ] atributos private
-[ ] GET/SET gerados no Eclipse
-[ ] métodos pedidos
-[ ] parâmetros corretos
-[ ] regra dentro da classe
-[ ] Main com new
-[ ] Main usando set
-[ ] métodos chamados
-[ ] if/else
-[ ] cálculo
-[ ] switch com break
-[ ] default
-[ ] Scanner
-[ ] buffer
-[ ] printf
-[ ] Ctrl + S
-[ ] executar
-[ ] teste normal
-[ ] teste de erro/limite
 
-============================================================
-21. REGRA DE OURO
-============================================================
-ENUNCIADO
--> ATRIBUTOS
--> CLASSE
--> PRIVATE
--> MÉTODOS
--> GET/SET NO ECLIPSE
--> IF/CÁLCULO
--> MAIN
--> NEW
--> SET
--> CHAMAR MÉTODOS
--> TESTAR
--> CORRIGIR SAÍDA
--> SALVAR + EXECUTAR
+16. REGRA DE OURO
+=================
+ATRIBUTOS → PRIVATE → MÉTODOS → GET/SET → REGRA → MAIN → NEW → SET → TESTE
 
-FIM
+É ISSO QUE VOCÊ PRECISA SABER PARA A PROVA.
