@@ -1,0 +1,380 @@
+GUIA DE PROVA JAVA / POO - FOCO EM CÓDIGO
+==========================================
+
+FORMATO DE ESTUDO:
+ESQUELETO -> CLASSE -> GET/SET PELO ECLIPSE -> MÉTODOS -> MAIN -> TESTE
+
+1. CLASSE - ESQUELETO
+
+package Modelo;
+
+public class Classe {
+
+    private int codigo;
+    private String nome;
+    private double valor;
+
+    // Source -> Generate Getters and Setters -> Select All -> Generate
+
+    public void algumaAcao() {
+        // regra de negócio
+    }
+
+    public double calcularAlgo() {
+        return 0;
+    }
+
+    public void exibirDados() {
+        System.out.println("...");
+    }
+}
+
+2. MAIN - ESQUELETO
+
+package Principal;
+
+import Modelo.Classe;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Classe objeto = new Classe();
+
+        objeto.setCodigo(101);
+        objeto.setNome("Teste");
+        objeto.setValor(150.00);
+
+        objeto.exibirDados();
+        objeto.algumaAcao();
+    }
+}
+
+3. GETTERS E SETTERS
+
+// Getter
+public int getCodigo() {
+    return codigo;
+}
+
+// Setter
+public void setCodigo(int codigo) {
+    this.codigo = codigo;
+}
+
+NA PROVA: GERAR AUTOMATICAMENTE PELO ECLIPSE.
+
+4. CONSTRUTOR
+
+public Classe(int codigo, String nome, double valor) {
+    this.codigo = codigo;
+    this.nome = nome;
+    this.valor = valor;
+}
+
+Classe objeto = new Classe(101, "Teste", 150.00);
+
+5. SCANNER
+
+import java.util.Scanner;
+
+Scanner scanner = new Scanner(System.in);
+
+String nome = scanner.nextLine();
+int idade = scanner.nextInt();
+double preco = scanner.nextDouble();
+boolean ativo = scanner.nextBoolean();
+
+scanner.close();
+
+BUFFER:
+int idade = scanner.nextInt();
+scanner.nextLine();
+String nome = scanner.nextLine();
+
+6. LOCALE / printf
+
+import java.util.Locale;
+Locale.setDefault(new Locale("pt", "BR"));
+
+System.out.printf("Preço: R$ %.2f%n", preco);
+
+%.2f = decimal com 2 casas.
+%n = nova linha.
+
+7. IF / ELSE
+
+if (condicao) {
+    // verdadeiro
+}
+else {
+    // falso
+}
+
+8. CÁLCULOS
+
+double media = (nota1 + nota2) / 2;
+double total = preco * quantidade;
+salario = salario + (salario * 0.25);
+
+CUIDADO:
+nota1 + nota2 / 2  !=  (nota1 + nota2) / 2
+
+9. MÉTODOS DE REGRA DE NEGÓCIO
+
+DEPÓSITO:
+public void depositar(double valor) {
+    saldo += valor;
+}
+
+SAQUE:
+public void sacar(double valor) {
+    if (valor <= saldo) {
+        saldo -= valor;
+        System.out.println("Saque realizado.");
+    }
+    else {
+        System.out.println("Saldo insuficiente.");
+    }
+}
+
+ESTOQUE:
+public void adicionarEstoque(int quantidade) {
+    this.quantidade += quantidade;
+}
+
+public void removerEstoque(int quantidade) {
+    if (quantidade <= this.quantidade) {
+        this.quantidade -= quantidade;
+    }
+    else {
+        System.out.println("Estoque insuficiente.");
+    }
+}
+
+MÉDIA:
+public double calcularMedia() {
+    return (nota1 + nota2) / 2;
+}
+
+10. MENU - ESQUELETO CORINGA
+
+import java.util.Scanner;
+
+Scanner scanner = new Scanner(System.in);
+int opcao;
+
+do {
+
+    System.out.println("===== MENU =====");
+    System.out.println("1 - ...");
+    System.out.println("2 - ...");
+    System.out.println("0 - Sair");
+
+    System.out.print("Opção: ");
+    opcao = scanner.nextInt();
+
+    switch (opcao) {
+
+        case 1:
+            // ação
+            break;
+
+        case 2:
+            // ação
+            break;
+
+        case 0:
+            System.out.println("Programa encerrado.");
+            break;
+
+        default:
+            System.out.println("Opção inválida.");
+            break;
+    }
+
+} while (opcao != 0);
+
+scanner.close();
+
+11. ALUNO
+
+private int matricula;
+private String nome;
+private double nota1;
+private double nota2;
+
+public double calcularMedia() {
+    return (nota1 + nota2) / 2;
+}
+
+public void verificarAprovacao() {
+    double media = calcularMedia();
+
+    if (media >= 6.0) {
+        System.out.println("Situação: Aprovado.");
+    }
+    else {
+        System.out.println("Situação: Reprovado.");
+    }
+}
+
+public void exibirDados() {
+    System.out.println("Matrícula: " + matricula);
+    System.out.println("Nome: " + nome);
+    System.out.println("Nota 1: " + nota1);
+    System.out.println("Nota 2: " + nota2);
+    System.out.printf("Média: %.2f%n", calcularMedia());
+}
+
+12. CONTA CORRENTE
+
+private int numero;
+private String titular;
+private double saldo;
+
+public void depositar(double valor) {
+    saldo += valor;
+}
+
+public void sacar(double valor) {
+    if (valor <= saldo) {
+        saldo -= valor;
+    }
+    else {
+        System.out.println("Saldo insuficiente.");
+    }
+}
+
+public void consultarSaldo() {
+    System.out.printf("Saldo: R$ %.2f%n", saldo);
+}
+
+public void exibirDados() {
+    System.out.println("Número da conta: " + numero);
+    System.out.println("Titular: " + titular);
+    System.out.printf("Saldo: R$ %.2f%n", saldo);
+}
+
+13. PRODUTO
+
+private int codigo;
+private String nome;
+private double preco;
+private int quantidade;
+
+public void adicionarEstoque(int quantidade) {
+    this.quantidade += quantidade;
+}
+
+public void removerEstoque(int quantidade) {
+    if (quantidade <= this.quantidade) {
+        this.quantidade -= quantidade;
+    }
+    else {
+        System.out.println("Estoque insuficiente.");
+    }
+}
+
+public double calcularValorEstoque() {
+    return preco * quantidade;
+}
+
+public void exibirDados() {
+    System.out.println("Código: " + codigo);
+    System.out.println("Nome: " + nome);
+    System.out.printf("Preço: R$ %.2f%n", preco);
+    System.out.println("Quantidade: " + quantidade);
+}
+
+14. MICRO-ESQUELETO PARA DECORAR
+
+public class X {
+
+    private int a;
+    private String b;
+    private double c;
+
+    // GERAR GETTERS/SETTERS NO ECLIPSE
+
+    public void fazerAlgo() {
+        // if / cálculo / alteração
+    }
+
+    public double calcularAlgo() {
+        return 0;
+    }
+
+    public void exibirDados() {
+        System.out.println("...");
+    }
+}
+
+Main:
+
+X x = new X();
+x.setA(...);
+x.setB(...);
+x.setC(...);
+x.exibirDados();
+x.fazerAlgo();
+
+15. ERROS PARA NÃO REPETIR
+
+- saque e deposito trocados como variável/parâmetro
+- This em vez de this
+- usar variável não declarada, como valorTotal
+- média sem parênteses
+- método dentro de método
+- chamar getter que ainda não existe
+- esquecer ;
+- esquecer }
+- esquecer break no switch
+- usar println quando precisa de printf
+- usar printf como texto dentro de println
+- esquecer scanner.nextLine() depois de nextInt/nextDouble quando o próximo input é texto
+- texto de saída errado, mesmo com a lógica correta
+
+16. CHECKLIST FINAL ANTES DE ENTREGAR
+
+[ ] package correto
+[ ] import correto
+[ ] classe = nome do arquivo
+[ ] atributos private
+[ ] GET/SET gerados no Eclipse
+[ ] métodos pedidos no enunciado
+[ ] parâmetros corretos
+[ ] regras dentro da classe
+[ ] Main cria objeto com new
+[ ] Main usa set para preencher
+[ ] Main chama os métodos
+[ ] if/else correto
+[ ] cálculos conferidos
+[ ] switch com break
+[ ] default
+[ ] Scanner correto
+[ ] buffer conferido
+[ ] printf conferido
+[ ] Ctrl + S
+[ ] executar
+[ ] testar caso normal
+[ ] testar caso de erro/limite
+
+17. ORDEM PARA RESOLVER A PROVA
+
+1. Ler enunciado.
+2. Listar atributos.
+3. Criar classe.
+4. Atributos private.
+5. Criar métodos pedidos.
+6. Gerar Getters/Setters no Eclipse.
+7. Fazer regras com if/else.
+8. Criar Main.
+9. Criar objeto.
+10. Preencher com set.
+11. Chamar métodos.
+12. Testar.
+13. Corrigir saída.
+14. Salvar e executar.
+
+FIM
