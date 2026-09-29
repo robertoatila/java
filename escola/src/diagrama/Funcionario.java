@@ -33,7 +33,7 @@ public class Funcionario extends Pessoa {
 	@Override
 	public void converter(int opcao) {
 
-		super.converter(opcao);
+		super.converter(opcao); //puxa da Classe pai Pessoa.java 
 
 		if (opcao == 1) {
 			endereco = endereco.toUpperCase();
