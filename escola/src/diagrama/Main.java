@@ -27,7 +27,7 @@ public class Main {
 		System.out.println("2 - minúsculo");
 		System.out.print("Opção: ");
 
-		int opcao = Integer.parseInt(scanner.nextLine());
+		int opcao = Integer.parseInt(scanner.nextLine()); // troca texto por numero, por precaução 
 
 		if (opcao == 1 || opcao == 2) {
 			funcionario.converter(opcao);
