@@ -7,7 +7,6 @@ package Banco;
 		@Override
 		public void sacar(double valor) {
 				alterarSaldo(-(valor + 5));
-				System.out.println("Conta corrente: " + getNumero() + " - Saque realizado (taxa de
-R$ 5,00)" );
+				System.out.println("Conta corrente: " + getNumero() + " - Saque realizado (taxa de R$ 5,00)");
 		}
 }

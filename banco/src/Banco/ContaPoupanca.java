@@ -7,7 +7,6 @@ package Banco;
 		@Override
 		public void sacar(double valor) {
 				alterarSaldo(-valor);
-				System.out.println("Conta poupança: " + getNumero() + "  - Saque realizado sem
-taxa.");
+				System.out.println("Conta poupança: " + getNumero() + " - Saque realizado sem taxa.");
 		}
 }
