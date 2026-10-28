@@ -6,4 +6,5 @@
  *
  */
 module Etec {
+	requires java.sql;
 }
